@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VerusEnergIA · Consultoría técnica en energía — Renovables, H2, BESS, CPD</title>
+<meta name="description" content="Consultoría técnica y legal para proyectos de energía en España: fotovoltaica, eólica, hidrógeno verde, almacenamiento BESS y centros de datos. Análisis integrado de viabilidad, diagnóstico de proyectos bloqueados y acceso a red.">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #F2F1EC;
+  --ink:       #111111;
+  --sage:      #7A9E5C;
+  --sage-lt:   #A8BE8C;
+  --sage-bg:   #C8D9B0;
+  --sage-pill: #B8D09C;
+  --sage-dark: #5E8047;
+  --yellow:    #EFC440;
+  --yellow-lt: #F5D870;
+  --yellow-bg: #FDF3C4;
+  --slate:     #666666;
+  --border:    #DDDAD2;
+  --off:       #E8E6DF;
+  --white:     #FFFFFF;
+  --ink2:      #1E1E1E;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  height: 64px;
+  background: rgba(242,241,236,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+
+.nav-logo-mark {
+  width: 32px; height: 32px;
+  background: var(--sage-lt);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: var(--white);
+  letter-spacing: -0.05em;
+  flex-shrink: 0;
+}
+
+.nav-logo-text {
+  color: var(--ink);
+  font-size: 0.9rem; font-weight: 700; letter-spacing: -0.01em;
+}
+
+.nav-logo-text span { color: var(--slate); font-weight: 400; }
+
+.nav-links {
+  display: flex; align-items: center; gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--slate); font-size: 0.85rem;
+  text-decoration: none; font-weight: 500;
+  transition: color .2s;
+}
+
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta {
+  background: var(--sage) !important;
+  color: var(--white) !important;
+  padding: 9px 20px !important;
+  border-radius: 100px !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  transition: background .2s !important;
+}
+
+.nav-cta:hover { background: var(--sage-dark) !important; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  background: var(--bg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 120px 6% 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-left { display: flex; flex-direction: column; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--sage-bg);
+  color: var(--sage-dark);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 14px; border-radius: 100px;
+  margin-bottom: 28px; width: fit-content;
+}
+
+#hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 900; line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  max-width: 600px;
+  margin-bottom: 24px;
+}
+
+.highlight {
+  position: relative;
+  display: inline-block;
+  padding: 0 6px;
+}
+
+.highlight::before {
+  content: '';
+  position: absolute;
+  inset: 2px -4px;
+  background: var(--sage-pill);
+  border-radius: 8px;
+  z-index: -1;
+}
+
+#hero p {
+  font-size: 1.05rem;
+  color: var(--slate);
+  max-width: 480px;
+  line-height: 1.8;
+  margin-bottom: 36px;
+}
+
+.hero-btns {
+  display: flex; gap: 12px; flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.btn-pill-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ink);
+  color: var(--white);
+  padding: 14px 28px; border-radius: 100px;
+  font-size: 0.95rem; font-weight: 700;
+  text-decoration: none; letter-spacing: -0.01em;
+  transition: background .2s, transform .15s;
+}
+
+.btn-pill-primary:hover {
+  background: var(--sage-dark);
+  transform: translateY(-1px);
+}
+
+.btn-pill-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--ink);
+  padding: 14px 28px; border-radius: 100px;
+  font-size: 0.95rem; font-weight: 500;
+  text-decoration: none;
+  transition: border-color .2s, background .2s;
+}
+
+.btn-pill-secondary:hover {
+  border-color: var(--ink);
+  background: var(--off);
+}
+
+.hero-trust {
+  display: flex; flex-wrap: wrap; gap: 20px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+}
+
+.trust-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.8rem; color: var(--slate); font-weight: 500;
+}
+
+/* ─── HERO CARDS (right column) ─── */
+.hero-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  gap: 12px;
+  align-self: center;
+}
+
+.hcard {
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hcard-top {
+  grid-column: 1 / -1;
+  background: var(--sage-bg);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px;
+}
+
+.hcard-top-label {
+  font-size: 0.85rem; font-weight: 700; color: var(--sage-dark);
+  max-width: 220px; line-height: 1.4;
+}
+
+.hcard-arrow {
+  width: 36px; height: 36px;
+  background: var(--white);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+
+.hcard-yellow {
+  background: var(--yellow);
+  grid-column: 1 / -1;
+}
+
+.hcard-yellow-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: rgba(0,0,0,0.4);
+  margin-bottom: 6px;
+}
+
+.hcard-yellow-num {
+  font-size: 3rem; font-weight: 900; letter-spacing: -0.05em;
+  color: var(--ink); line-height: 1;
+  margin-bottom: 6px;
+}
+
+.hcard-yellow-sub {
+  font-size: 0.8rem; color: rgba(0,0,0,0.55); line-height: 1.4;
+  max-width: 240px;
+}
+
+.hcard-yellow-bar {
+  display: flex; align-items: flex-end; gap: 4px;
+  margin-top: 16px; height: 40px;
+}
+
+.hcard-bar-item {
+  flex: 1; background: rgba(255,255,255,0.5);
+  border-radius: 4px 4px 0 0;
+}
+
+.hcard-bar-item.active { background: rgba(255,255,255,0.9); }
+
+.hcard-small {
+  background: var(--white);
+}
+
+.hcard-small-label {
+  font-size: 0.7rem; color: var(--slate); text-transform: uppercase;
+  letter-spacing: .06em; margin-bottom: 6px;
+}
+
+.hcard-small-num {
+  font-size: 1.6rem; font-weight: 900; letter-spacing: -0.04em;
+  color: var(--ink); line-height: 1;
+}
+
+.hcard-small-sub {
+  font-size: 0.72rem; color: var(--slate); margin-top: 4px;
+}
+
+.hcard-green {
+  grid-column: 1 / -1;
+  background: var(--white);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 24px;
+}
+
+.hcard-green-left {}
+
+.hcard-green-label {
+  font-size: 0.7rem; color: var(--slate); text-transform: uppercase;
+  letter-spacing: .06em; margin-bottom: 4px;
+}
+
+.hcard-green-num {
+  font-size: 1.8rem; font-weight: 900; letter-spacing: -0.04em; color: var(--ink);
+}
+
+.hcard-green-currency {
+  font-size: 0.8rem; color: var(--slate); font-weight: 400;
+}
+
+.hcard-green-info {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.75rem; color: var(--slate);
+}
+
+.hcard-green-dot {
+  width: 8px; height: 8px; background: var(--sage-lt); border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(0.8); }
+}
+
+/* ─── SECTIONS generic ─── */
+section { padding: 96px 6%; }
+
+.eyebrow {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--sage);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 20px; height: 2px;
+  background: var(--sage-lt);
+  border-radius: 2px;
+}
+
+h2.display {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 900; letter-spacing: -0.03em;
+  line-height: 1.1; color: var(--ink);
+  max-width: 720px;
+  margin-bottom: 20px;
+}
+
+h2.display.light { color: var(--ink); }
+
+/* ─── PROBLEMA ─── */
+#problema {
+  background: var(--white);
+  padding-top: 96px; padding-bottom: 96px;
+}
+
+.problema-intro {
+  max-width: 640px; margin-bottom: 60px;
+}
+
+.problema-intro p {
+  font-size: 1.1rem; color: var(--slate); line-height: 1.8;
+}
+
+.problema-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.prob-card {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 32px;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+
+.prob-card:hover {
+  border-color: var(--sage-lt);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  transform: translateY(-3px);
+}
+
+.prob-num {
+  font-size: 3rem; font-weight: 900; letter-spacing: -0.05em;
+  color: var(--border); line-height: 1;
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.prob-card h3 {
+  font-size: 1rem; font-weight: 800; color: var(--ink);
+  margin-bottom: 10px; letter-spacing: -0.01em;
+}
+
+.prob-card p { font-size: 0.9rem; color: var(--slate); line-height: 1.7; }
+
+/* ─── PRODUCTOS ─── */
+#productos { background: var(--bg); }
+
+.productos-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 52px; flex-wrap: wrap; gap: 20px;
+}
+
+.productos-header p {
+  max-width: 360px; color: var(--slate); font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.prod-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 36px 32px;
+  display: flex; flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .25s, box-shadow .25s, transform .2s;
+}
+
+.prod-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--sage-lt);
+  opacity: 0;
+  transition: opacity .25s;
+}
+
+.prod-card:hover {
+  border-color: var(--sage-lt);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.07);
+  transform: translateY(-4px);
+}
+
+.prod-card:hover::before { opacity: 1; }
+
+.prod-card.highlight {
+  border-color: var(--sage-lt);
+  background: var(--bg);
+}
+
+.prod-card.highlight::before { opacity: 1; }
+
+.prod-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--sage-bg);
+  color: var(--sage-dark);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 4px 12px; border-radius: 100px;
+  margin-bottom: 24px; align-self: flex-start;
+}
+
+.prod-icon {
+  width: 48px; height: 48px;
+  background: var(--bg); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+.prod-card h3 {
+  font-size: 1.2rem; font-weight: 800; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 6px;
+}
+
+.prod-for {
+  font-size: 0.8rem; color: var(--sage); font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.prod-card p {
+  font-size: 0.9rem; color: var(--slate); line-height: 1.75;
+  flex: 1; margin-bottom: 28px;
+}
+
+.prod-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+
+.prod-price {
+  font-size: 1.1rem; font-weight: 900; color: var(--ink);
+  letter-spacing: -0.02em; line-height: 1;
+}
+
+.prod-price small {
+  display: block;
+  font-size: 0.72rem; font-weight: 500; color: var(--slate);
+  letter-spacing: 0; margin-top: 3px;
+}
+
+.prod-link {
+  font-size: 0.82rem; font-weight: 700; color: var(--sage);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 4px;
+  transition: gap .2s, color .2s;
+}
+
+.prod-link:hover { gap: 8px; color: var(--sage-dark); }
+
+.otros-link {
+  text-align: center; margin-top: 36px;
+  font-size: 0.9rem; color: var(--slate);
+}
+
+.otros-link a {
+  color: var(--ink); font-weight: 700;
+  text-decoration: none; border-bottom: 2px solid var(--border);
+  transition: border-color .2s;
+}
+
+.otros-link a:hover { border-color: var(--sage-lt); }
+
+/* ─── COMO FUNCIONA ─── */
+#como {
+  background: var(--white);
+  position: relative; overflow: hidden;
+}
+
+.como-inner {
+  display: grid; grid-template-columns: 1fr 1.6fr;
+  gap: 80px; align-items: start;
+}
+
+.como-left h2 { color: var(--ink); margin-bottom: 16px; }
+
+.como-left p {
+  color: var(--slate); font-size: 0.95rem; line-height: 1.75;
+  max-width: 320px; margin-bottom: 36px;
+}
+
+.como-garantias {
+  display: flex; flex-direction: column; gap: 12px;
+}
+
+.garantia {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 0.85rem; color: var(--ink);
+}
+
+.garantia::before {
+  content: '✓';
+  width: 22px; height: 22px; flex-shrink: 0;
+  background: var(--sage-bg);
+  border: 1px solid var(--sage-lt);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sage-dark); font-size: 0.7rem; font-weight: 700;
+}
+
+.como-steps {
+  display: flex; flex-direction: column; gap: 0;
+  position: relative;
+}
+
+.como-step {
+  display: flex; gap: 24px;
+  padding-bottom: 40px;
+  position: relative;
+}
+
+.como-step:last-child { padding-bottom: 0; }
+
+.step-track {
+  display: flex; flex-direction: column;
+  align-items: center; flex-shrink: 0;
+}
+
+.step-dot {
+  width: 44px; height: 44px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; font-weight: 800; color: var(--slate);
+  flex-shrink: 0; z-index: 1;
+}
+
+.como-step.active .step-dot {
+  background: var(--sage-lt);
+  border-color: var(--sage-lt);
+  color: var(--white);
+}
+
+.step-line {
+  width: 1px; flex: 1; min-height: 32px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+.como-step:last-child .step-line { display: none; }
+
+.step-body { padding-top: 10px; }
+
+.step-body h3 {
+  font-size: 1rem; font-weight: 800; color: var(--ink);
+  margin-bottom: 6px; letter-spacing: -0.01em;
+}
+
+.step-body p { font-size: 0.875rem; color: var(--slate); line-height: 1.7; }
+
+/* ─── SOBRE ─── */
+#sobre { background: var(--bg); }
+
+.sobre-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+}
+
+.sobre-visual {
+  position: relative;
+}
+
+.sobre-photo-wrap {
+  width: 100%; aspect-ratio: 4/5;
+  background: linear-gradient(160deg, var(--sage-bg) 0%, var(--off) 100%);
+  border-radius: 24px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sage-lt); font-size: 5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.sobre-card {
+  position: absolute; bottom: -20px; right: -20px;
+  background: var(--white);
+  border-radius: 14px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  display: flex; align-items: center; gap: 12px;
+  border: 1px solid var(--border);
+}
+
+.sobre-card-dot {
+  width: 10px; height: 10px;
+  background: var(--sage-lt);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  flex-shrink: 0;
+}
+
+.sobre-card-text {
+  font-size: 0.8rem; font-weight: 700; color: var(--ink);
+}
+
+.sobre-card-sub { font-size: 0.72rem; color: var(--slate); font-weight: 400; }
+
+.sobre-text h2 { margin-bottom: 20px; }
+
+.sobre-text p {
+  font-size: 0.95rem; color: var(--slate); line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.sobre-text p strong { color: var(--ink); font-weight: 700; }
+
+.sobre-tags {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px;
+}
+
+.skill-tag {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  color: var(--ink); font-size: 0.78rem; font-weight: 600;
+  padding: 5px 14px; border-radius: 100px;
+  transition: border-color .2s, color .2s;
+}
+
+.skill-tag:hover { border-color: var(--sage-lt); color: var(--sage); }
+
+/* ─── CONTACTO ─── */
+#contacto { background: var(--white); }
+
+.contacto-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start;
+}
+
+.contacto-left h2 { margin-bottom: 16px; }
+
+.contacto-left p {
+  font-size: 0.95rem; color: var(--slate); line-height: 1.75;
+  margin-bottom: 32px;
+}
+
+.contacto-info { display: flex; flex-direction: column; gap: 14px; }
+
+.info-row {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.9rem; color: var(--ink);
+}
+
+.info-icon {
+  width: 36px; height: 36px;
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 9px; display: flex; align-items: center;
+  justify-content: center; font-size: 1rem; flex-shrink: 0;
+}
+
+.info-row a { color: var(--ink); text-decoration: none; font-weight: 500; }
+
+.contact-form {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 20px; padding: 36px;
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+
+.form-group label {
+  font-size: 0.8rem; font-weight: 700; color: var(--ink);
+  letter-spacing: .02em;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.9rem; color: var(--ink);
+  font-family: inherit;
+  background: var(--white);
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--sage-lt);
+  box-shadow: 0 0 0 3px rgba(168,190,140,0.2);
+}
+
+.form-group textarea { resize: vertical; min-height: 110px; }
+
+.form-span { grid-column: 1 / -1; }
+
+.form-privacy {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.78rem; color: var(--slate); line-height: 1.6;
+  margin-top: 4px;
+}
+
+.form-privacy input { width: auto; margin: 0; flex-shrink: 0; margin-top: 2px; }
+
+.form-submit {
+  width: 100%; padding: 14px;
+  background: var(--ink); color: var(--white);
+  border: none; border-radius: 100px;
+  font-size: 0.95rem; font-weight: 700; font-family: inherit;
+  cursor: pointer; letter-spacing: -0.01em;
+  transition: background .2s, transform .15s;
+}
+
+.form-submit:hover {
+  background: var(--sage-dark);
+  transform: translateY(-1px);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink);
+  padding: 40px 6%;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 20px;
+}
+
+.footer-brand {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.footer-logo-mark {
+  width: 28px; height: 28px;
+  background: var(--sage-lt);
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 900; color: var(--white);
+}
+
+.footer-name { color: var(--white); font-size: 0.875rem; font-weight: 700; }
+
+footer nav { display: flex; gap: 24px; }
+
+footer nav a {
+  color: rgba(255,255,255,0.4); font-size: 0.8rem;
+  text-decoration: none; transition: color .15s;
+}
+
+footer nav a:hover { color: rgba(255,255,255,0.8); }
+
+footer p { font-size: 0.78rem; color: rgba(255,255,255,0.3); }
+
+/* ─── SECTION LIGHT/ALT ─── */
+.section-sage {
+  background: var(--sage-bg) !important;
+}
+
+.section-off {
+  background: var(--bg) !important;
+}
+
+/* card base */
+.card-base {
+  background: var(--white);
+  border-radius: 18px;
+  border: 1.5px solid var(--border);
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+}
+
+.card-base:hover {
+  border-color: var(--sage-lt);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  #hero { grid-template-columns: 1fr; gap: 48px; }
+  .hero-cards { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 900px) {
+  .problema-cards { grid-template-columns: 1fr; }
+  .productos-grid { grid-template-columns: 1fr; }
+  .como-inner { grid-template-columns: 1fr; gap: 48px; }
+  .sobre-inner { grid-template-columns: 1fr; }
+  .contacto-inner { grid-template-columns: 1fr; }
+  .sobre-card { right: 10px; bottom: -10px; }
+}
+
+@media (max-width: 640px) {
+  nav { padding: 0 4%; }
+  section { padding: 72px 4%; }
+  #hero { padding: 100px 4% 60px; }
+  .hero-cards { display: none; }
+  .nav-links { display: none; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-span { grid-column: 1; }
+  footer { flex-direction: column; text-align: center; }
+  footer nav { justify-content: center; }
+}
+
+/* ─── HERO COMPACT ─── */
+.hero-compact {
+  padding: 100px 6% 56px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.hero-compact .hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--sage-bg);
+  color: var(--sage-dark);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 6px 14px; border-radius: 100px;
+  margin-bottom: 24px; width: fit-content;
+}
+.hero-compact h1 {
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  font-weight: 900; line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  max-width: 640px;
+  margin-bottom: 18px;
+}
+.hero-compact .hero-sub {
+  font-size: 1rem;
+  color: var(--slate);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+.hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ─── TAB BAR ─── */
+.tab-bar {
+  position: sticky; top: 64px; z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  padding: 0 6%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+.tab-btn {
+  white-space: nowrap;
+  font-size: 0.875rem; font-weight: 600;
+  padding: 14px 20px;
+  color: var(--slate);
+  border: none; background: none; cursor: pointer;
+  border-bottom: 2.5px solid transparent;
+  font-family: inherit;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--ink); border-bottom-color: var(--sage); font-weight: 700; }
+
+/* ─── TAB PANELS ─── */
+.tab-panels { min-height: 400px; background: var(--bg); }
+.tab-panel { display: none; padding: 40px 6%; }
+.tab-panel.visible { display: block; }
+
+/* ─── SERVICIOS ─── */
+.services-h2 {
+  font-size: 1.5rem; font-weight: 900;
+  color: var(--ink); letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.services-sub { color: var(--slate); font-size: 0.9rem; margin-bottom: 32px; }
+.category-label {
+  font-size: 0.68rem; font-weight: 800;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sage-dark);
+  margin-bottom: 12px; margin-top: 28px;
+}
+.category-label:first-of-type { margin-top: 0; }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.product-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  transition: border-color 0.15s;
+}
+.product-card:hover { border-color: var(--sage-lt); }
+.product-card.featured {
+  border-color: var(--sage);
+  background: linear-gradient(135deg, #f0f7eb 0%, var(--white) 100%);
+}
+.product-name { font-size: 0.9rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+.product-desc { font-size: 0.78rem; color: var(--slate); line-height: 1.55; margin-bottom: 12px; }
+.product-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  border-top: 1px solid var(--border); padding-top: 10px;
+}
+.product-price { font-size: 0.85rem; font-weight: 900; color: var(--ink); }
+.product-time { font-size: 0.72rem; color: var(--slate); }
+
+/* ─── CÓMO FUNCIONA ─── */
+.steps-list { display: flex; flex-direction: column; gap: 20px; max-width: 600px; margin-bottom: 40px; }
+.step { display: flex; gap: 18px; align-items: flex-start; }
+.step-num {
+  width: 36px; height: 36px; flex-shrink: 0;
+  background: var(--ink); color: var(--white);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 900;
+}
+.step-body h4 { font-size: 1rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+.step-body p { font-size: 0.875rem; color: var(--slate); line-height: 1.6; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.why-card {
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 20px;
+}
+.why-num { font-size: 1.5rem; font-weight: 900; color: var(--sage-lt); margin-bottom: 8px; }
+.why-card h4 { font-size: 0.85rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; }
+.why-card p { font-size: 0.78rem; color: var(--slate); line-height: 1.55; }
+
+/* ─── NOSOTROS ─── */
+.nosotros-prose { max-width: 720px; }
+.nosotros-prose p { font-size: 1rem; color: #374151; line-height: 1.85; margin-bottom: 20px; }
+.nosotros-prose p:last-child { margin-bottom: 0; }
+.nosotros-prose strong { color: var(--ink); font-weight: 800; }
+
+/* ─── CONTACTO ─── */
+.contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 860px; }
+.contacto-h3 {
+  font-size: 1.4rem; font-weight: 900; color: var(--ink);
+  line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.02em;
+}
+.contacto-text { font-size: 0.9rem; color: var(--slate); line-height: 1.75; margin-bottom: 16px; }
+.contacto-email { font-size: 0.9rem; font-weight: 700; color: var(--sage-dark); text-decoration: none; }
+.contacto-email:hover { text-decoration: underline; }
+.form-field {
+  width: 100%;
+  background: var(--white); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 11px 14px;
+  font-size: 0.875rem; color: var(--ink);
+  font-family: inherit;
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color 0.15s;
+  appearance: none;
+}
+.form-field:focus { border-color: var(--sage); }
+.form-field::placeholder { color: var(--slate); }
+.btn-submit {
+  display: inline-flex; align-items: center;
+  background: var(--sage); color: var(--white);
+  padding: 12px 28px; border-radius: 100px;
+  font-size: 0.9rem; font-weight: 700;
+  border: none; cursor: pointer; font-family: inherit;
+  transition: background 0.2s;
+}
+.btn-submit:hover { background: var(--sage-dark); }
+
+/* ─── FOOTER TAB ─── */
+.site-footer {
+  padding: 28px 6%;
+  border-top: 1px solid var(--border);
+  background: var(--white);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-copy { font-size: 0.8rem; color: var(--slate); }
+.footer-links { display: flex; gap: 20px; }
+.footer-links a { font-size: 0.78rem; color: var(--slate); text-decoration: none; }
+.footer-links a:hover { color: var(--ink); }
+
+/* ─── RESPONSIVE TABS ─── */
+@media (max-width: 768px) {
+  .hero-compact { padding: 88px 5% 40px; }
+  .hero-compact h1 { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .hero-cta-row { flex-direction: column; align-items: flex-start; }
+  .tab-bar { padding: 0 4%; }
+  .tab-btn { padding: 12px 14px; font-size: 0.82rem; }
+  .tab-panel { padding: 28px 5%; }
+  .product-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .contacto-grid { grid-template-columns: 1fr; gap: 28px; }
+  .site-footer { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+}
+@media (max-width: 480px) {
+  .nav-links li:not(:last-child) { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">VE</div>
+    <div class="nav-logo-text">VerusEnergIA</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showTab('servicios');return false;">Servicios</a></li>
+    <li><a href="#" onclick="showTab('como');return false;">Cómo funciona</a></li>
+    <li><a href="#" onclick="showTab('sobre');return false;">Nosotros</a></li>
+    <li><a href="#" onclick="showTab('contacto');return false;" class="nav-cta">Semáforo — €500</a></li>
+  </ul>
+</nav>
+
+<!-- HERO COMPACT -->
+<section class="hero-compact">
+  <div class="hero-badge">FV · 30 MW · Cuenca · Nodo: 8 MW disponibles</div>
+  <h1>Claridad técnica antes de comprometer capital.</h1>
+  <p class="hero-sub">Análisis técnico, legal y financiero integrados. Veredicto en días, no en meses. Con un análisis que dice la verdad sobre tu proyecto.</p>
+  <div class="hero-cta-row">
+    <a href="#" onclick="showTab('contacto');return false;" class="btn-pill-primary">Encargar Semáforo — €500</a>
+    <a href="#" onclick="showTab('contacto');return false;" class="btn-pill-secondary">Cuéntame el proyecto →</a>
+  </div>
+</section>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('servicios', this)">Servicios</button>
+  <button class="tab-btn" onclick="showTab('como', this)">Cómo funciona</button>
+  <button class="tab-btn" onclick="showTab('sobre', this)">Nosotros</button>
+  <button class="tab-btn" onclick="showTab('contacto', this)">Contacto</button>
+</div>
+
+<!-- TAB PANELS -->
+<div class="tab-panels">
+
+  <!-- SERVICIOS -->
+  <div class="tab-panel visible" id="tab-servicios">
+    <h2 class="services-h2">¿En qué punto estás?</h2>
+    <p class="services-sub">Elige el análisis que necesitas según tu situación.</p>
+
+    <div class="category-label">Antes de invertir</div>
+    <div class="product-grid">
+      <div class="product-card featured">
+        <div class="product-name">Semáforo de Viabilidad</div>
+        <div class="product-desc">Veredicto técnico, legal y financiero en 48h. Verde, amarillo o rojo — y exactamente por qué.</div>
+        <div class="product-meta"><span class="product-price">€500</span><span class="product-time">48h hábiles</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Pre-factibilidad completa</div>
+        <div class="product-desc">Cinco ejes: red, urbanismo, ambiental, legal y financiero en un informe.</div>
+        <div class="product-meta"><span class="product-price">A consultar</span><span class="product-time">7–15 días</span></div>
+      </div>
+    </div>
+
+    <div class="category-label">Proyectos con problemas</div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-name">Diagnóstico Proyecto Parado</div>
+        <div class="product-desc">Permisos pero sin avance. Identifico el bloqueo real y las opciones.</div>
+        <div class="product-meta"><span class="product-price">€1.500–2.500</span><span class="product-time">5–7 días</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Due Diligence técnico-legal</div>
+        <div class="product-desc">Antes de cerrar una compra. ATR, permisos, riesgos ocultos.</div>
+        <div class="product-meta"><span class="product-price">€2.500–4.000</span><span class="product-time">5–7 días</span></div>
+      </div>
+    </div>
+
+    <div class="category-label">Inteligencia continua</div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-name">Radar de Nodos REE</div>
+        <div class="product-desc">Alertas de capacidad 30-45 días antes que el mapa oficial. Metodología propia BOE-REE.</div>
+        <div class="product-meta"><span class="product-price">€400/mes</span><span class="product-time">o €800–1.500 puntual</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Alerta Regulatoria</div>
+        <div class="product-desc">Boletín mensual filtrado por tu cartera. Normativa, convocatorias, concursos.</div>
+        <div class="product-meta"><span class="product-price">€300/mes</span><span class="product-time">mensual</span></div>
+      </div>
+    </div>
+
+    <div class="category-label">Otros servicios</div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-name">BESS Retrofit</div>
+        <div class="product-desc">Viabilidad de añadir almacenamiento a planta FV existente.</div>
+        <div class="product-meta"><span class="product-price">€2.000–3.500</span><span class="product-time">consultar</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Priorización de Cartera</div>
+        <div class="product-desc">Scoring y ranking de 3 o más proyectos en cartera.</div>
+        <div class="product-meta"><span class="product-price">€1.200–2.000</span><span class="product-time">consultar</span></div>
+      </div>
+      <div class="product-card">
+        <div class="product-name">Simulacro Concurso TJ</div>
+        <div class="product-desc">Scoring simulado de oferta para concursos de capacidad.</div>
+        <div class="product-meta"><span class="product-price">€1.500–2.500</span><span class="product-time">consultar</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CÓMO FUNCIONA -->
+  <div class="tab-panel" id="tab-como">
+    <h2 class="services-h2">Sin reuniones de descubrimiento interminables.</h2>
+    <p class="services-sub">Tres pasos desde que me escribes hasta que tienes el informe.</p>
+
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h4>Cuéntame el proyecto</h4>
+          <p>Un formulario breve o un email. Municipio, tecnología, potencia y documentación disponible.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h4>Confirmo el encargo en 24h</h4>
+          <p>Alcance exacto, precio fijo y plazo comprometido. Contrato digital.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h4>Recibes el entregable</h4>
+          <p>Informe en PDF con semáforos visuales y una recomendación concreta. Las dudas sobre el informe están incluidas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <h4>Fuentes que no existen internamente</h4>
+        <p>BOE, 8 CCAA, topología REE, MITECO, catastro y SIGPAC cruzados de forma sistemática.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <h4>Sin conflicto de interés</h4>
+        <p>El análisis no depende de que el proyecto siga adelante. El veredicto negativo es igual de válido.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <h4>Velocidad real</h4>
+        <p>Lo que internamente requiere 4 departamentos y 3 semanas, aquí es un entregable con fecha.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOSOTROS -->
+  <div class="tab-panel" id="tab-sobre">
+    <h2 class="services-h2">Nosotros</h2>
+    <div class="nosotros-prose">
+      <p>VerusEnergIA nace de la combinación de años analizando y modelando sistemas energéticos complejos y la experiencia de consultoría, con la convicción de que la transición energética necesita proyectos que realmente se construyan.</p>
+      <p><strong>Lo que sabemos:</strong> sistemas energéticos reales — redes eléctricas, hidrógeno verde, tramitación autonómica, acceso a red. Cómo funciona la capacidad de los nudos REE antes de que aparezca en el mapa oficial. Qué proyectos tienen un camino y cuáles no.</p>
+      <p><strong>Lo que hacemos:</strong> análisis técnico, legal y financiero integrado antes de comprometer capital. Un solo entregable con un veredicto claro — no tres informes desconectados. El análisis dice lo que hay, aunque no sea lo que se esperaba.</p>
+      <p><strong>Para qué:</strong> para que los proyectos que merecen construirse lleguen a construirse. Y los que no, se descarten antes de consumir recursos que podrían ir a otro lado.</p>
+    </div>
+  </div>
+
+  <!-- CONTACTO -->
+  <div class="tab-panel" id="tab-contacto">
+    <div class="contacto-grid">
+      <div>
+        <h3 class="contacto-h3">Si tienes un proyecto que necesita un análisis honesto, hablamos.</h3>
+        <p class="contacto-text">No necesitas saber qué servicio necesitas. Cuéntame en qué punto estás — proyecto nuevo, permisos parados, planta operativa, o inversor evaluando un activo.</p>
+        <a href="mailto:amparo@verusenergia.es" class="contacto-email">amparo@verusenergia.es</a>
+      </div>
+      <!-- Formspree: reemplaza XXXXXXXX con tu form ID de formspree.io -->
+      <form action="https://TUUSUARIO.pythonanywhere.com/contact" method="POST">
+        <input type="text" name="nombre" class="form-field" placeholder="Nombre" required>
+        <input type="email" name="email" class="form-field" placeholder="Email" required>
+        <input type="text" name="proyecto" class="form-field" placeholder="CCAA · Tecnología · Potencia">
+        <select name="servicio" class="form-field">
+          <option value="" disabled selected>¿Qué necesitas?</option>
+          <option>Semáforo de Viabilidad</option>
+          <option>Pre-factibilidad completa</option>
+          <option>Diagnóstico Proyecto Parado</option>
+          <option>Due Diligence técnico-legal</option>
+          <option>Radar de Nodos REE</option>
+          <option>Alerta Regulatoria</option>
+          <option>Otro / No lo sé todavía</option>
+        </select>
+        <button type="submit" class="btn-submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <span class="footer-copy">© 2026 VerusEnergIA · <a href="mailto:amparo@verusenergia.es" style="color:inherit;">amparo@verusenergia.es</a></span>
+  <nav class="footer-links">
+    <a href="politica-privacidad.html">Privacidad</a>
+    <a href="aviso-legal.html">Aviso legal</a>
+    <a href="politica-cookies.html">Cookies</a>
+  </nav>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('visible'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('visible');
+  if (btn) {
+    btn.classList.add('active');
+  } else {
+    var idx = {servicios:0, como:1, sobre:2, contacto:3}[id];
+    var btns = document.querySelectorAll('.tab-btn');
+    if (btns[idx]) btns[idx].classList.add('active');
+  }
+}
+</script>
+
+
+</body>
+</html>
